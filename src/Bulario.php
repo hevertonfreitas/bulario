@@ -4,7 +4,8 @@ namespace Hevertonfreitas\Bulario;
 
 use Goutte\Client;
 
-class Bulario {
+class Bulario
+{
 
     /**
      * Retira caracteres desnecessários da função JS fVisualizarBula do sistema
@@ -13,7 +14,8 @@ class Bulario {
      * @param string $jsFunc Função JS no formato <code>fVisualizarBula('xxx', 'xxx')</code>
      * @return array Array com as informações da transacao e anexo da bula
      */
-    private static function stripJsFunction($jsFunc) {
+    private static function stripJsFunction($jsFunc)
+    {
         $explode = explode(',', $jsFunc);
         $strTransacao = trim(rtrim(str_replace('fVisualizarBula(\'', '', $explode[0]), '\''));
         $strAnexo = trim(rtrim(str_replace('\'', '', $explode[1]), ')'));
@@ -34,7 +36,8 @@ class Bulario {
      * @link http://www.anvisa.gov.br/datavisa/fila_bula/frmResultado.asp
      * @throws Exception Caso não for possível trazer os resultados
      */
-    public static function buscarMedicamentos($medicamento, $empresa = '', $expediente = '') {
+    public static function buscarMedicamentos($medicamento, $empresa = '', $expediente = '')
+    {
 
         $client = new Client();
 
@@ -77,5 +80,4 @@ class Bulario {
 
         return $medicamentos;
     }
-
 }
