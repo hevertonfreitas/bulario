@@ -1,6 +1,6 @@
-# BS3Bulario
+# Bulario
 
-Bibllioteca para pesquisar no bulário eletronico da anvisa
+Bibllioteca para pesquisar no bulário eletrônico da anvisa
 
 ## Uso
 
@@ -8,4 +8,4 @@ Para utilizar a função, é necessário apenas um método
 
 ###
 
-BS3Bulario::buscarMedicamentos($medicamento, $empresa = '', $expediente = '')
+Bulario::buscarMedicamentos($medicamento, $empresa = '', $expediente = '')
