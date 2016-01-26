@@ -1,0 +1,24 @@
+{
+    "name": "hevertonfreitas/bulario",
+    "description": "Pacote útil para fazer buscas de bulas do site da ANVISA",
+    "keywords": ["php", "bulario", "anvisa"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Heverton Coneglian de Freitas",
+            "email": "hevertonfreitas1@yahoo.com.br"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "fabpot/goutte": "^3.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hevertonfreitas\\Bulario\\": "src/"
+        }
+    }
+}
