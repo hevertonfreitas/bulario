@@ -15,6 +15,7 @@
 namespace Hevertonfreitas\Bulario;
 
 use Goutte\Client;
+use Carbon\Carbon;
 
 /**
  * Classe para auxiliar na busca de informações sobre bulas no Brasil,
@@ -86,7 +87,7 @@ class Bulario
                             'medicamento' => $nomeMedicamento,
                             'empresa' => $nomeEmpresa,
                             'expediente' => $exp,
-                            'data_publicacao' => $dataPub,
+                            'data_publicacao' => Carbon::createFromFormat('d/m/Y', $dataPub),
                             'dados_bula_paciente' => $dadosBulaPaciente,
                             'link_bula_paciente' => "http://www.anvisa.gov.br/datavisa/fila_bula/frmVisualizarBula.asp?pNuTransacao={$dadosBulaPaciente['transacao']}&pIdAnexo={$dadosBulaPaciente['anexo']}",
                             'dados_bula_profissional' => $dadosBulaProfissional,
