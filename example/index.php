@@ -7,7 +7,7 @@ function debug($var)
     $template = PHP_SAPI !== 'cli' ? '<pre>%s</pre>' : "\n%s\n";
     printf($template, print_r($var, true));
 }
-$medicamento = 'dipirona';
+$medicamento = 'astofo';
 
 $medicamentos = Bulario::buscarMedicamentos($medicamento);
 

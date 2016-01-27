@@ -20,8 +20,8 @@ class Bulario
         $strTransacao = trim(rtrim(str_replace('fVisualizarBula(\'', '', $explode[0]), '\''));
         $strAnexo = trim(rtrim(str_replace('\'', '', $explode[1]), ')'));
         return array(
-            'transacao' => $strTransacao,
-            'anexo' => $strAnexo
+            'transacao' => (int) $strTransacao,
+            'anexo' => (int) $strAnexo
         );
     }
 
@@ -55,25 +55,30 @@ class Bulario
         $medicamentos = array();
 
         try {
-            $crawler->filter('#tblResultado > tbody > tr')->each(function ($node) use (&$medicamentos) {
-                $nomeMedicamento = trim($node->filter('td')->eq(0)->text());
-                $nomeEmpresa = trim($node->filter('td')->eq(1)->text());
-                $exp = trim($node->filter('td')->eq(2)->text());
-                $dataPub = trim($node->filter('td')->eq(3)->text());
-                $dadosBulaPaciente = self::stripJsFunction($node->filter('td')->eq(4)->filter('a')->attr('onclick'));
-                $dadosBulaProfissional = self::stripJsFunction($node->filter('td')->eq(5)->filter('a')->attr('onclick'));
+            $trs = $crawler->filter('#tblResultado > tbody > tr');
+            if ($trs->first()->filter('td')->count() > 1) {
+                $trs->each(function ($node) use (&$medicamentos) {
+                    if (trim($node->filter('td')->eq(0)->text()) != 'Nenhuma bula na fila de análise') {
+                        $nomeMedicamento = trim($node->filter('td')->eq(0)->text());
+                        $nomeEmpresa = trim($node->filter('td')->eq(1)->text());
+                        $exp = trim($node->filter('td')->eq(2)->text());
+                        $dataPub = trim($node->filter('td')->eq(3)->text());
+                        $dadosBulaPaciente = self::stripJsFunction($node->filter('td')->eq(4)->filter('a')->attr('onclick'));
+                        $dadosBulaProfissional = self::stripJsFunction($node->filter('td')->eq(5)->filter('a')->attr('onclick'));
 
-                $medicamentos[] = array(
-                    'medicamento' => $nomeMedicamento,
-                    'empresa' => $nomeEmpresa,
-                    'expediente' => $exp,
-                    'data_publicacao' => $dataPub,
-                    'dados_bula_paciente' => $dadosBulaPaciente,
-                    'link_bula_paciente' => "http://www.anvisa.gov.br/datavisa/fila_bula/frmVisualizarBula.asp?pNuTransacao={$dadosBulaPaciente['transacao']}&pIdAnexo={$dadosBulaPaciente['anexo']}",
-                    'dados_bula_profissional' => $dadosBulaProfissional,
-                    'link_bula_profissional' => "http://www.anvisa.gov.br/datavisa/fila_bula/frmVisualizarBula.asp?pNuTransacao={$dadosBulaProfissional['transacao']}&pIdAnexo={$dadosBulaProfissional['anexo']}"
-                );
-            });
+                        $medicamentos[] = array(
+                            'medicamento' => $nomeMedicamento,
+                            'empresa' => $nomeEmpresa,
+                            'expediente' => $exp,
+                            'data_publicacao' => $dataPub,
+                            'dados_bula_paciente' => $dadosBulaPaciente,
+                            'link_bula_paciente' => "http://www.anvisa.gov.br/datavisa/fila_bula/frmVisualizarBula.asp?pNuTransacao={$dadosBulaPaciente['transacao']}&pIdAnexo={$dadosBulaPaciente['anexo']}",
+                            'dados_bula_profissional' => $dadosBulaProfissional,
+                            'link_bula_profissional' => "http://www.anvisa.gov.br/datavisa/fila_bula/frmVisualizarBula.asp?pNuTransacao={$dadosBulaProfissional['transacao']}&pIdAnexo={$dadosBulaProfissional['anexo']}"
+                        );
+                    }
+                });
+            }
         } catch (Exception $ex) {
             throw new Exception('Houve um erro ao obter os medicamentos do sistema da Anvisa!');
         }
