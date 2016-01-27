@@ -1,9 +1,26 @@
 <?php
+/**
+ * Bulário: https://bitbucket.org/hevertonfreitas/bulario
+ * Copyright (c) Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>
+ *
+ * Distribuído sob a licença MIT
+ * Para informações completas de copyright e distribuição, veja LICENSE.txt
+ * Redistribuições de arquivos devem conter a nota de copyright acima.
+ *
+ * @copyright     Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>
+ * @link          https://bitbucket.org/hevertonfreitas/bulario
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
 
 namespace Hevertonfreitas\Bulario;
 
 use Goutte\Client;
 
+/**
+ * Classe para auxiliar na busca de informações sobre bulas no Brasil,
+ * extraindo dados diretamente do site da ANVISA.
+ * @link http://www.anvisa.gov.br/datavisa/fila_bula/frmResultado.asp
+ */
 class Bulario
 {
 
@@ -33,7 +50,6 @@ class Bulario
      * @param string $empresa Nome da fabricante do medicamento
      * @param string $expediente Número do expediente da bula
      * @return array Todas as bulas encontradas
-     * @link http://www.anvisa.gov.br/datavisa/fila_bula/frmResultado.asp
      * @throws Exception Caso não for possível trazer os resultados
      */
     public static function buscarMedicamentos($medicamento, $empresa = '', $expediente = '')
