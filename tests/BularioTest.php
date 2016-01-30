@@ -19,19 +19,20 @@ use PHPUnit_Framework_TestCase;
 class BularioTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testarBuscaMedicamento()
-    {
-        $medicamentos = Bulario::buscarMedicamentos('dipirona');
-        foreach ($medicamentos as $medicamento) {
-            $this->assertInternalType('int', $medicamento['dados_bula_paciente']['transacao']);
-            $this->assertInternalType('int', $medicamento['dados_bula_paciente']['anexo']);
-        }
-    }
-
     public function testBuscaVazia()
     {
         $medicamentos = Bulario::buscarMedicamentos('astofo');
 
         $this->assertEmpty($medicamentos);
+    }
+
+    public function testBulaPacienteValida()
+    {
+        $medicamentos = Bulario::buscarMedicamentos('', '', '0870281/15-1');
+
+        foreach ($medicamentos as $medicamento) {
+            $headers = get_headers($medicamento['link_bula_paciente'], 1);
+            $this->assertContains('pdf', $headers['Content-Type']);
+        }
     }
 }

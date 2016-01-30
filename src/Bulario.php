@@ -37,10 +37,11 @@ class Bulario
         $explode = explode(',', $jsFunc);
         $strTransacao = trim(rtrim(str_replace('fVisualizarBula(\'', '', $explode[0]), '\''));
         $strAnexo = trim(rtrim(str_replace('\'', '', $explode[1]), ')'));
-        return array(
-            'transacao' => (int) $strTransacao,
-            'anexo' => (int) $strAnexo
+        $result = array(
+            'transacao' => $strTransacao,
+            'anexo' => $strAnexo
         );
+        return $result;
     }
 
     /**
