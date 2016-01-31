@@ -22,7 +22,7 @@ use Stringy\Stringy as Str;
  * @author Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>
  * @package \Hevertonfreitas\Bulario
  */
-class Bula
+class Bula implements \JsonSerializable
 {
 
     /**
@@ -167,5 +167,30 @@ class Bula
     public function setBulaProfissional(DadosBula $bulaProfissional)
     {
         $this->bulaProfissional = $bulaProfissional;
+    }
+
+    /**
+     * Função implementada da interface \JsonSerializable, para serializar
+     * o objeto em JSON
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return array(
+            'medicamento' => (string) $this->medicamento,
+            'empresa' => (string) $this->empresa,
+            'expediente' => $this->expediente,
+            'dataPublicacao' => $this->dataPublicacao->format('d/m/Y'),
+            'bulaPaciente' => array(
+                'transacao' => $this->bulaPaciente->getTransacao(),
+                'anexo' => $this->bulaPaciente->getAnexo(),
+                'url' => $this->bulaPaciente->getUrl()
+            ),
+            'bulaProfissional' => array(
+                'transacao' => $this->bulaProfissional->getTransacao(),
+                'anexo' => $this->bulaProfissional->getAnexo(),
+                'url' => $this->bulaProfissional->getUrl()
+            )
+        );
     }
 }
