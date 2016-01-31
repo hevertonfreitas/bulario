@@ -1,6 +1,6 @@
 <?php
 /**
- * Bulário: https://bitbucket.org/hevertonfreitas/bulario
+ * Bulário: https://github.com/hevertonfreitas/bulario
  * Copyright (c) Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>
  *
  * Distribuído sob a licença MIT
@@ -8,7 +8,7 @@
  * Redistribuições de arquivos devem conter a nota de copyright acima.
  *
  * @copyright     Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>
- * @link          https://bitbucket.org/hevertonfreitas/bulario
+ * @link          https://github.com/hevertonfreitas/bulario
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
