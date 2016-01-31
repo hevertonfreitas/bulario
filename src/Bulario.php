@@ -15,12 +15,13 @@
 namespace Hevertonfreitas\Bulario;
 
 use Goutte\Client;
-use Carbon\Carbon;
 
 /**
  * Classe para auxiliar na busca de informações sobre bulas no Brasil,
  * extraindo dados diretamente do site da ANVISA.
  * @link http://www.anvisa.gov.br/datavisa/fila_bula/frmResultado.asp
+ * @author Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>
+ * @package \Hevertonfreitas\Bulario
  */
 class Bulario
 {
@@ -84,16 +85,15 @@ class Bulario
                         $dadosBulaPaciente = self::stripJsFunction($node->filter('td')->eq(4)->filter('a')->attr('onclick'));
                         $dadosBulaProfissional = self::stripJsFunction($node->filter('td')->eq(5)->filter('a')->attr('onclick'));
 
-                        $medicamentos[] = array(
-                            'medicamento' => $nomeMedicamento,
-                            'empresa' => $nomeEmpresa,
-                            'expediente' => $exp,
-                            'data_publicacao' => Carbon::createFromFormat('d/m/Y', $dataPub),
-                            'dados_bula_paciente' => $dadosBulaPaciente,
-                            'link_bula_paciente' => "http://www.anvisa.gov.br/datavisa/fila_bula/frmVisualizarBula.asp?pNuTransacao={$dadosBulaPaciente['transacao']}&pIdAnexo={$dadosBulaPaciente['anexo']}",
-                            'dados_bula_profissional' => $dadosBulaProfissional,
-                            'link_bula_profissional' => "http://www.anvisa.gov.br/datavisa/fila_bula/frmVisualizarBula.asp?pNuTransacao={$dadosBulaProfissional['transacao']}&pIdAnexo={$dadosBulaProfissional['anexo']}"
-                        );
+                        $medicamento = new Bula();
+
+                        $medicamento->setMedicamento($nomeMedicamento);
+                        $medicamento->setEmpresa($nomeEmpresa);
+                        $medicamento->setExpediente($exp);
+                        $medicamento->setDataPublicacao($dataPub);
+                        $medicamento->setBulaPaciente(new DadosBula($dadosBulaPaciente['transacao'], $dadosBulaPaciente['anexo']));
+                        $medicamento->setBulaProfissional(new DadosBula($dadosBulaProfissional['transacao'], $dadosBulaProfissional['anexo']));
+                        $medicamentos[] = $medicamento;
                     }
                 });
             }

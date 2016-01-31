@@ -16,23 +16,18 @@ namespace Hevertonfreitas\Bulario;
 
 use PHPUnit_Framework_TestCase;
 
-class BularioTest extends PHPUnit_Framework_TestCase
+class BulaTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testBuscaVazia()
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testDataPublicacao()
     {
-        $medicamentos = Bulario::buscarMedicamentos('astofo');
+        $bula = new Bula();
 
-        $this->assertEmpty($medicamentos);
-    }
+        $bula->setDataPublicacao('2016-01-01');
 
-    public function testBulaPacienteValida()
-    {
-        $medicamentos = Bulario::buscarMedicamentos('', '', '0870281/15-1');
-
-        foreach ($medicamentos as $medicamento) {
-            $headers = get_headers($medicamento->getBulaPaciente()->getUrl(), 1);
-            $this->assertContains('pdf', $headers['Content-Type']);
-        }
+        $this->assertEquals('01/01/2016', $bula->getDataPublicacao()->format('d/m/Y'));
     }
 }
