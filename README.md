@@ -4,7 +4,7 @@
 [![Latest Stable Version](https://poser.pugx.org/hevertonfreitas/bulario/v/stable)](https://packagist.org/packages/hevertonfreitas/bulario)
 [![Total Downloads](https://poser.pugx.org/hevertonfreitas/bulario/downloads)](https://packagist.org/packages/hevertonfreitas/bulario)
 [![Latest Unstable Version](https://poser.pugx.org/hevertonfreitas/bulario/v/unstable)](https://packagist.org/packages/hevertonfreitas/bulario)
-[![License](https://poser.pugx.org/hevertonfreitas/bulario/license)](https://packagist.org/packages/hevertonfreitas/bulario)
+[![License](https://poser.pugx.org/hevertonfreitas/bulario/license)](http://opensource.org/licenses/MIT)
 
 Bibllioteca para pesquisar no bulário eletrônico da anvisa
 
