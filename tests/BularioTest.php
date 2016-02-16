@@ -21,18 +21,45 @@ class BularioTest extends PHPUnit_Framework_TestCase
 
     public function testBuscaVazia()
     {
-        $medicamentos = Bulario::buscarMedicamentos('astofo');
+        try {
+            $medicamentos = Bulario::buscarMedicamentos('astofo');
 
-        $this->assertEmpty($medicamentos);
+            $this->assertEmpty($medicamentos);
+        } catch (\Exception $ex) {
+            $this->assertTrue($ex instanceof \GuzzleHttp\Exception\ConnectException);
+        }
     }
 
     public function testBulaPacienteValida()
     {
-        $medicamentos = Bulario::buscarMedicamentos('', '', '0870281/15-1');
+        try {
+            $medicamentos = Bulario::buscarMedicamentos('', '', '0870281/15-1');
 
-        foreach ($medicamentos as $medicamento) {
-            $headers = get_headers($medicamento->getBulaPaciente()->getUrl(), 1);
-            $this->assertContains('pdf', $headers['Content-Type']);
+            foreach ($medicamentos as $medicamento) {
+                $headers = get_headers($medicamento->getBulaPaciente()->getUrl(), 1);
+                $this->assertContains('pdf', $headers['Content-Type']);
+            }
+        } catch (\Exception $ex) {
+            $this->assertTrue($ex instanceof \GuzzleHttp\Exception\ConnectException);
+        }
+    }
+
+    public function testBuscaMedicamentos()
+    {
+        try {
+            $medicamentos = array(
+                'Cloridrato de Propafenona',
+                'Viagra',
+                'Dipirona',
+                'Aldactone',
+                'Albendazol'
+            );
+            foreach ($medicamentos as $nome) {
+                $medicamentos = Bulario::buscarMedicamentos($nome);
+                $this->assertNotEmpty($medicamentos);
+            }
+        } catch (\Exception $ex) {
+            $this->assertTrue($ex instanceof \GuzzleHttp\Exception\ConnectException);
         }
     }
 }
