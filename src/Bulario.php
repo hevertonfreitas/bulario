@@ -101,10 +101,34 @@ class Bulario
                     }
                 });
             }
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             throw new Exception('Houve um erro ao obter os medicamentos do sistema da Anvisa!');
         }
 
         return $medicamentos;
+    }
+
+    /**
+     * Retorna a lista de todos os medicamentos cadastrados na Anvisa
+     *
+     * @return array
+     */
+    public static function listarMedicamentos()
+    {
+        $listaMedicamentos = file_get_contents('http://www.anvisa.gov.br/datavisa/fila_bula/funcoes/ajax.asp?opcao=getsuggestion&ptipo=1');
+
+        return json_decode(utf8_encode($listaMedicamentos));
+    }
+
+    /**
+     * Retorna a lista de todos as empresas cadastradas na Anvisa
+     *
+     * @return array
+     */
+    public static function listarEmpresas()
+    {
+        $listaEmpresas = file_get_contents('http://www.anvisa.gov.br/datavisa/fila_bula/funcoes/ajax.asp?opcao=getsuggestion&ptipo=2');
+
+        return json_decode(utf8_encode($listaEmpresas));
     }
 }
