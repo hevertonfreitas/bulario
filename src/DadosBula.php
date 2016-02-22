@@ -1,47 +1,51 @@
 <?php
 /**
  * Bulário: https://github.com/hevertonfreitas/bulario
- * Copyright (c) Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>
+ * Copyright (c) Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>.
  *
  * Distribuído sob a licença MIT
  * Para informações completas de copyright e distribuição, veja LICENSE.txt
  * Redistribuições de arquivos devem conter a nota de copyright acima.
  *
  * @copyright     Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>
+ *
  * @link          https://github.com/hevertonfreitas/bulario
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 namespace Hevertonfreitas\Bulario;
 
 /**
- * Classe que define o id da transação e do anexo de uma bula
+ * Classe que define o id da transação e do anexo de uma bula.
+ *
  * @author Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>
- * @package \Hevertonfreitas\Bulario
  */
 class DadosBula
 {
-
     /**
-     * ID da transação da bula
+     * ID da transação da bula.
+     *
      * @var string
      */
     private $transacao;
 
     /**
-     * ID do anexo da bula
+     * ID do anexo da bula.
+     *
      * @var string
      */
     private $anexo;
 
     /**
-     * URL para acessar o PDF da bula
+     * URL para acessar o PDF da bula.
+     *
      * @var string
      */
     private $url;
 
     /**
-     * Retorna o ID da transação da bula
+     * Retorna o ID da transação da bula.
+     *
      * @return string
      */
     public function getTransacao()
@@ -50,7 +54,8 @@ class DadosBula
     }
 
     /**
-     * Retorna o ID do anexo da bula
+     * Retorna o ID do anexo da bula.
+     *
      * @return string
      */
     public function getAnexo()
@@ -59,7 +64,8 @@ class DadosBula
     }
 
     /**
-     * Retorna a URL para o PDF da bula
+     * Retorna a URL para o PDF da bula.
+     *
      * @return string
      */
     public function getUrl()
@@ -68,7 +74,8 @@ class DadosBula
     }
 
     /**
-     * Constrói os dados da bula
+     * Constrói os dados da bula.
+     *
      * @param string $transacao
      * @param string $anexo
      */
