@@ -109,7 +109,7 @@ class Bulario
     }
 
     /**
-     * Retorna a lista de todos os medicamentos cadastrados na Anvisa
+     * Retorna a lista de todos os medicamentos cadastrados na Anvisa.
      *
      * @return array
      */
@@ -121,7 +121,7 @@ class Bulario
     }
 
     /**
-     * Retorna a lista de todos as empresas cadastradas na Anvisa
+     * Retorna a lista de todos as empresas cadastradas na Anvisa.
      *
      * @return array
      */
