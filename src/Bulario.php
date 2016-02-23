@@ -15,8 +15,8 @@
  */
 namespace Hevertonfreitas\Bulario;
 
-use Goutte\Client;
 use Doctrine\Common\Cache\FilesystemCache;
+use Goutte\Client;
 
 /**
  * Classe para auxiliar na busca de informações sobre bulas no Brasil,
