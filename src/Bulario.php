@@ -16,6 +16,7 @@
 namespace Hevertonfreitas\Bulario;
 
 use Goutte\Client;
+use Doctrine\Common\Cache\FilesystemCache;
 
 /**
  * Classe para auxiliar na busca de informações sobre bulas no Brasil,
@@ -115,9 +116,20 @@ class Bulario
      */
     public static function listarMedicamentos()
     {
-        $listaMedicamentos = file_get_contents('http://www.anvisa.gov.br/datavisa/fila_bula/funcoes/ajax.asp?opcao=getsuggestion&ptipo=1');
+        $cacheDriver = new FilesystemCache(sys_get_temp_dir());
+        $cacheDriver->setNamespace('hevertonfreitas_bulario_');
 
-        return json_decode(utf8_encode($listaMedicamentos));
+        $result = $cacheDriver->fetch('lista_medicamentos');
+
+        if (empty($result)) {
+            $listaMedicamentos = file_get_contents('http://www.anvisa.gov.br/datavisa/fila_bula/funcoes/ajax.asp?opcao=getsuggestion&ptipo=1');
+
+            $result = json_decode(utf8_encode($listaMedicamentos));
+
+            $cacheDriver->save('lista_medicamentos', $result);
+        }
+
+        return $result;
     }
 
     /**
@@ -127,8 +139,19 @@ class Bulario
      */
     public static function listarEmpresas()
     {
-        $listaEmpresas = file_get_contents('http://www.anvisa.gov.br/datavisa/fila_bula/funcoes/ajax.asp?opcao=getsuggestion&ptipo=2');
+        $cacheDriver = new FilesystemCache(sys_get_temp_dir());
+        $cacheDriver->setNamespace('hevertonfreitas_bulario_');
 
-        return json_decode(utf8_encode($listaEmpresas));
+        $result = $cacheDriver->fetch('lista_empresas');
+
+        if (empty($result)) {
+            $listaEmpresas = file_get_contents('http://www.anvisa.gov.br/datavisa/fila_bula/funcoes/ajax.asp?opcao=getsuggestion&ptipo=2');
+
+            $result = json_decode(utf8_encode($listaEmpresas));
+
+            $cacheDriver->save('lista_empresas', $result);
+        }
+
+        return $result;
     }
 }
