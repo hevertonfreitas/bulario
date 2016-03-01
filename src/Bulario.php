@@ -64,9 +64,9 @@ class Bulario
      */
     public static function buscarMedicamentos($medicamento = '', $empresa = '', $expediente = '')
     {
-    	if (empty($medicamento) && empty($empresa) && empty($expediente)) {
-    		throw new \InvalidArgumentException('Informe pelo menos um parâmetro para o método!');
-    	}
+        if (empty($medicamento) && empty($empresa) && empty($expediente)) {
+            throw new \InvalidArgumentException('Informe pelo menos um parâmetro para o método!');
+        }
         $Client = new Client();
 
         $crawler = $Client->request('POST', 'http://www.anvisa.gov.br/datavisa/fila_bula/frmResultado.asp', [
