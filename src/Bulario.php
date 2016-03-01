@@ -32,7 +32,7 @@ class Bulario
     /**
      * Retira caracteres desnecessários da função JS fVisualizarBula do sistema
      * da Anvisa e retorna um array com o número da transação e anexo da bula.
-     * 
+     *
      * @param string $jsFunc Função JS no formato <code>fVisualizarBula('xxx', 'xxx')</code>
      *
      * @return array Array com as informações da transacao e anexo da bula
@@ -53,7 +53,7 @@ class Bulario
     /**
      * Obtém a lista de medicamentos do sistema da Anvisa e retorna um array
      * com os resultados.
-     * 
+     *
      * @param string $medicamento Nome de medicamento
      * @param string $empresa     Nome da fabricante do medicamento
      * @param string $expediente  Número do expediente da bula
