@@ -13,6 +13,7 @@
  *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Hevertonfreitas\Bulario;
 
 use Collections\ArrayList;
@@ -44,7 +45,7 @@ class Bulario
         $strAnexo = trim(rtrim(str_replace('\'', '', $explode[1]), ')'));
         $result = [
             'transacao' => $strTransacao,
-            'anexo'     => $strAnexo,
+            'anexo' => $strAnexo,
         ];
 
         return $result;
@@ -70,14 +71,14 @@ class Bulario
         $Client = new Client();
 
         $crawler = $Client->request('POST', 'http://www.anvisa.gov.br/datavisa/fila_bula/frmResultado.asp', [
-            'hddLetra'           => '',
-            'txtMedicamento'     => $medicamento,
-            'txtEmpresa'         => $empresa,
-            'txtNuExpediente'    => $expediente,
+            'hddLetra' => '',
+            'txtMedicamento' => $medicamento,
+            'txtEmpresa' => $empresa,
+            'txtNuExpediente' => $expediente,
             'txtDataPublicacaoI' => '',
             'txtDataPublicacaoF' => '',
-            'txtPageSize'        => '1000',
-            'btnPesquisar'       => '',
+            'txtPageSize' => '1000',
+            'btnPesquisar' => '',
         ]);
 
         $Medicamentos = new ArrayList();

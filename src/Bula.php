@@ -13,6 +13,7 @@
  *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Hevertonfreitas\Bulario;
 
 use Carbon\Carbon;
@@ -196,19 +197,19 @@ class Bula implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'medicamento'    => (string) $this->medicamento,
-            'empresa'        => (string) $this->empresa,
-            'expediente'     => $this->expediente,
+            'medicamento' => (string) $this->medicamento,
+            'empresa' => (string) $this->empresa,
+            'expediente' => $this->expediente,
             'dataPublicacao' => $this->dataPublicacao->format('d/m/Y'),
-            'bulaPaciente'   => [
+            'bulaPaciente' => [
                 'transacao' => $this->bulaPaciente->getTransacao(),
-                'anexo'     => $this->bulaPaciente->getAnexo(),
-                'url'       => $this->bulaPaciente->getUrl(),
+                'anexo' => $this->bulaPaciente->getAnexo(),
+                'url' => $this->bulaPaciente->getUrl(),
             ],
             'bulaProfissional' => [
                 'transacao' => $this->bulaProfissional->getTransacao(),
-                'anexo'     => $this->bulaProfissional->getAnexo(),
-                'url'       => $this->bulaProfissional->getUrl(),
+                'anexo' => $this->bulaProfissional->getAnexo(),
+                'url' => $this->bulaProfissional->getUrl(),
             ],
         ];
     }
