@@ -15,6 +15,7 @@
  */
 namespace Hevertonfreitas\Bulario;
 
+use Collections\ArrayList;
 use Doctrine\Common\Cache\FilesystemCache;
 use Goutte\Client;
 
@@ -57,15 +58,18 @@ class Bulario
      * @param string $empresa     Nome da fabricante do medicamento
      * @param string $expediente  Número do expediente da bula
      *
-     * @throws Exception Caso não for possível trazer os resultados
+     * @throws \Exception Caso não for possível trazer os resultados
      *
-     * @return array Todas as bulas encontradas
+     * @return Collections\ArrayList Todas as bulas encontradas
      */
-    public static function buscarMedicamentos($medicamento, $empresa = '', $expediente = '')
+    public static function buscarMedicamentos($medicamento = '', $empresa = '', $expediente = '')
     {
-        $client = new Client();
+    	if (empty($medicamento) && empty($empresa) && empty($expediente)) {
+    		throw new \InvalidArgumentException('Informe pelo menos um parâmetro para o método!');
+    	}
+        $Client = new Client();
 
-        $crawler = $client->request('POST', 'http://www.anvisa.gov.br/datavisa/fila_bula/frmResultado.asp', [
+        $crawler = $Client->request('POST', 'http://www.anvisa.gov.br/datavisa/fila_bula/frmResultado.asp', [
             'hddLetra'           => '',
             'txtMedicamento'     => $medicamento,
             'txtEmpresa'         => $empresa,
@@ -76,12 +80,12 @@ class Bulario
             'btnPesquisar'       => '',
         ]);
 
-        $medicamentos = [];
+        $Medicamentos = new ArrayList();
 
         try {
             $trs = $crawler->filter('#tblResultado > tbody > tr');
             if ($trs->first()->filter('td')->count() > 1) {
-                $trs->each(function ($node) use (&$medicamentos) {
+                $trs->each(function ($node) use (&$Medicamentos) {
                     if (trim($node->filter('td')->eq(0)->text()) != 'Nenhuma bula na fila de análise') {
                         $nomeMedicamento = trim($node->filter('td')->eq(0)->text());
                         $nomeEmpresa = trim($node->filter('td')->eq(1)->text());
@@ -90,15 +94,16 @@ class Bulario
                         $dadosBulaPaciente = self::stripJsFunction($node->filter('td')->eq(4)->filter('a')->attr('onclick'));
                         $dadosBulaProfissional = self::stripJsFunction($node->filter('td')->eq(5)->filter('a')->attr('onclick'));
 
-                        $medicamento = new Bula();
+                        $Bula = new Bula();
 
-                        $medicamento->setMedicamento($nomeMedicamento);
-                        $medicamento->setEmpresa($nomeEmpresa);
-                        $medicamento->setExpediente($exp);
-                        $medicamento->setDataPublicacao($dataPub);
-                        $medicamento->setBulaPaciente(new DadosBula($dadosBulaPaciente['transacao'], $dadosBulaPaciente['anexo']));
-                        $medicamento->setBulaProfissional(new DadosBula($dadosBulaProfissional['transacao'], $dadosBulaProfissional['anexo']));
-                        $medicamentos[] = $medicamento;
+                        $Bula->setMedicamento($nomeMedicamento);
+                        $Bula->setEmpresa($nomeEmpresa);
+                        $Bula->setExpediente($exp);
+                        $Bula->setDataPublicacao($dataPub);
+                        $Bula->setBulaPaciente(new DadosBula($dadosBulaPaciente['transacao'], $dadosBulaPaciente['anexo']));
+                        $Bula->setBulaProfissional(new DadosBula($dadosBulaProfissional['transacao'], $dadosBulaProfissional['anexo']));
+
+                        $Medicamentos->add($Bula);
                     }
                 });
             }
@@ -106,7 +111,7 @@ class Bulario
             throw new Exception('Houve um erro ao obter os medicamentos do sistema da Anvisa!');
         }
 
-        return $medicamentos;
+        return $Medicamentos;
     }
 
     /**

@@ -14,7 +14,8 @@
         "fabpot/goutte": "^3.1",
         "nesbot/carbon": "^1.21",
         "danielstjules/stringy": "~2.2",
-        "doctrine/cache": "^1.6"
+        "doctrine/cache": "^1.6",
+        "easyframework/collections": "^4.1"
     },
     "require-dev": {
         "phpunit/phpunit": "*"
