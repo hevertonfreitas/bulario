@@ -110,13 +110,13 @@ extraindo dados diretamente do site da ANVISA.</p>
 		
 		
 		<b>Namespace:</b> <a href="namespace-Hevertonfreitas.html">Hevertonfreitas</a>\<a href="namespace-Hevertonfreitas.Bulario.html">Bulario</a><br>
-		<b>Package:</b> \Hevertonfreitas\Bulario<br>
+		
 
 				<b>Author:</b>
 				Heverton Coneglian de Freitas <a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#x68;&#x65;&#118;&#101;&#x72;&#x74;o&#110;&#102;&#x72;&#x65;&#105;&#116;&#x61;&#x73;1&#64;&#121;&#x61;&#x68;&#111;&#111;&#x2e;&#x63;o&#109;&#46;&#x62;&#x72;">&#x68;&#x65;&#118;&#101;&#x72;&#x74;o&#110;&#102;&#x72;&#x65;&#105;&#116;&#x61;&#x73;1&#64;&#121;&#x61;&#x68;&#111;&#111;&#x2e;&#x63;o&#109;&#46;&#x62;&#x72;</a><br>
 				<b>Link:</b>
 				<a href="http://www.anvisa.gov.br/datavisa/fila_bula/frmResultado.asp">http://www.anvisa.gov.br/datavisa/fila_bula/frmResultado.asp</a><br>
-			<b>Located at</b> <a href="source-class-Hevertonfreitas.Bulario.Bulario.html#19-106" title="Go to source code">src/Bulario.php</a>
+			<b>Located at</b> <a href="source-class-Hevertonfreitas.Bulario.Bulario.html#23-163" title="Go to source code">src/Bulario.php</a>
 		<br>
 	</div>
 
@@ -129,23 +129,23 @@ extraindo dados diretamente do site da ANVISA.</p>
 		<td class="attributes"><code>
 			 public static
 
-			array
+			Collections\ArrayList
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_buscarMedicamentos">#</a>
-		<code><a href="source-class-Hevertonfreitas.Bulario.Bulario.html#48-105" title="Go to source code">buscarMedicamentos</a>( <span>string <var>$medicamento</var></span>, <span>string <var>$empresa</var> = <span class="php-quote">''</span></span>, <span>string <var>$expediente</var> = <span class="php-quote">''</span></span> )</code>
+		<code><a href="source-class-Hevertonfreitas.Bulario.Bulario.html#54-116" title="Go to source code">buscarMedicamentos</a>( <span>string <var>$medicamento</var> = <span class="php-quote">''</span></span>, <span>string <var>$empresa</var> = <span class="php-quote">''</span></span>, <span>string <var>$expediente</var> = <span class="php-quote">''</span></span> )</code>
 
 		<div class="description short">
 			<p>Obtém a lista de medicamentos do sistema da Anvisa e retorna um array
-com os resultados</p>
+com os resultados.</p>
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Obtém a lista de medicamentos do sistema da Anvisa e retorna um array
-com os resultados</p>
+com os resultados.</p>
 
 
 				<h4>Parameters</h4>
@@ -160,13 +160,81 @@ com os resultados</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array<br>Todas as bulas encontradas
+					Collections\ArrayList<br>Todas as bulas encontradas
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
 					<code><a href="class-Exception.html">Exception</a></code><br>Caso não for possível trazer os resultados
 				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="listarMedicamentos" id="_listarMedicamentos">
+
+		<td class="attributes"><code>
+			 public static
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_listarMedicamentos">#</a>
+		<code><a href="source-class-Hevertonfreitas.Bulario.Bulario.html#118-139" title="Go to source code">listarMedicamentos</a>( )</code>
+
+		<div class="description short">
+			<p>Retorna a lista de todos os medicamentos cadastrados na Anvisa.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Retorna a lista de todos os medicamentos cadastrados na Anvisa.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="listarEmpresas" id="_listarEmpresas">
+
+		<td class="attributes"><code>
+			 public static
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_listarEmpresas">#</a>
+		<code><a href="source-class-Hevertonfreitas.Bulario.Bulario.html#141-162" title="Go to source code">listarEmpresas</a>( )</code>
+
+		<div class="description short">
+			<p>Retorna a lista de todos as empresas cadastradas na Anvisa.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Retorna a lista de todos as empresas cadastradas na Anvisa.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
 
 
 
