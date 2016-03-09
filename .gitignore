@@ -4,3 +4,13 @@ composer.lock
 .DS_Store
 nbproject/
 /phpunit.xml
+.idea
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
