@@ -61,7 +61,7 @@ class Bulario
      *
      * @throws \Exception Caso não for possível trazer os resultados
      *
-     * @return Collections\ArrayList Todas as bulas encontradas
+     * @return \Collections\ArrayList Todas as bulas encontradas
      */
     public static function buscarMedicamentos($medicamento = '', $empresa = '', $expediente = '')
     {
