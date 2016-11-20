@@ -1,13 +1,13 @@
 <?php
 /**
  * Bulário: https://github.com/hevertonfreitas/bulario
- * Copyright (c) Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>.
+ * Copyright (c) Heverton Coneglian de Freitas <hevertonconeglian@gmail.com>.
  *
  * Distribuído sob a licença MIT
  * Para informações completas de copyright e distribuição, veja LICENSE.txt
  * Redistribuições de arquivos devem conter a nota de copyright acima.
  *
- * @copyright     Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>
+ * @copyright     Heverton Coneglian de Freitas <hevertonconeglian@gmail.com>
  *
  * @link          https://github.com/hevertonfreitas/bulario
  *
@@ -21,7 +21,7 @@ use PHPUnit_Framework_TestCase;
 class BulaTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testDataPublicacao()
     {

@@ -1,13 +1,13 @@
 <?php
 /**
  * Bulário: https://github.com/hevertonfreitas/bulario
- * Copyright (c) Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>.
+ * Copyright (c) Heverton Coneglian de Freitas <hevertonconeglian@gmail.com>.
  *
  * Distribuído sob a licença MIT
  * Para informações completas de copyright e distribuição, veja LICENSE.txt
  * Redistribuições de arquivos devem conter a nota de copyright acima.
  *
- * @copyright     Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>
+ * @copyright     Heverton Coneglian de Freitas <hevertonconeglian@gmail.com>
  *
  * @link          https://github.com/hevertonfreitas/bulario
  *
@@ -19,7 +19,7 @@ namespace Hevertonfreitas\Bulario;
 /**
  * Classe que define o id da transação e do anexo de uma bula.
  *
- * @author Heverton Coneglian de Freitas <hevertonfreitas1@yahoo.com.br>
+ * @author Heverton Coneglian de Freitas <hevertonconeglian@gmail.com>
  */
 class DadosBula
 {

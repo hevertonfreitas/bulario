@@ -6,7 +6,7 @@
     "authors": [
         {
             "name": "Heverton Coneglian de Freitas",
-            "email": "hevertonfreitas1@yahoo.com.br"
+            "email": "hevertonconeglian@gmail.com"
         }
     ],
     "require": {
@@ -18,11 +18,11 @@
         "easyframework/collections": "^4.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "^5.6"
     },
     "autoload": {
         "psr-4": {
-            "Hevertonfreitas\\Bulario\\": "src/"
+            "Hevertonfreitas\\": "src/"
         }
     }
 }
