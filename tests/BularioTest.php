@@ -16,9 +16,9 @@
 
 namespace Hevertonfreitas\Bulario;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BularioTest extends PHPUnit_Framework_TestCase
+class BularioTest extends TestCase
 {
     public function testBuscaVazia()
     {
@@ -34,7 +34,7 @@ class BularioTest extends PHPUnit_Framework_TestCase
     public function testBulaPacienteValida()
     {
         try {
-            $medicamentos = Bulario::buscarMedicamentos('', '', '0870281/15-1');
+            $medicamentos = Bulario::buscarMedicamentos('', '', '1862861/17-3');
 
             foreach ($medicamentos as $medicamento) {
                 $headers = get_headers($medicamento->getBulaPaciente()->getUrl(), 1);
@@ -50,7 +50,7 @@ class BularioTest extends PHPUnit_Framework_TestCase
         try {
             $medicamentos = [
                 'Cloridrato de Propafenona',
-                'Viagra',
+                'Dobeven',
                 'Dipirona',
                 'Aldactone',
                 'Albendazol',

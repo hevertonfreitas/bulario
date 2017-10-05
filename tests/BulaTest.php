@@ -16,9 +16,9 @@
 
 namespace Hevertonfreitas\Bulario;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BulaTest extends PHPUnit_Framework_TestCase
+class BulaTest extends TestCase
 {
     /**
      * @expectedException \InvalidArgumentException
