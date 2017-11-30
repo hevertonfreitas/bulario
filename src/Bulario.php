@@ -109,7 +109,7 @@ class Bulario
                 });
             }
         } catch (\Exception $ex) {
-            throw new Exception('Houve um erro ao obter os medicamentos do sistema da Anvisa!');
+            throw new \Exception('Houve um erro ao obter os medicamentos do sistema da Anvisa!');
         }
 
         return $Medicamentos;

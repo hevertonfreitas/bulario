@@ -132,60 +132,78 @@ class Bula implements \JsonSerializable
      * Seta o nome do medicamento.
      *
      * @param string $medicamento
+     * @return $this
      */
     public function setMedicamento($medicamento)
     {
         $this->medicamento = Str::create($medicamento);
+
+        return $this;
     }
 
     /**
      * Seta a empresa fabricante do medicamento.
      *
      * @param string $empresa
+     * @return $this
      */
     public function setEmpresa($empresa)
     {
         $this->empresa = Str::create($empresa);
+
+        return $this;
     }
 
     /**
      * Seta o número de expediente da bula.
      *
      * @param string $expediente
+     * @return $this
      */
     public function setExpediente($expediente)
     {
         $this->expediente = $expediente;
+
+        return $this;
     }
 
     /**
      * Seta a data de publicação da bula.
      *
      * @param string $dataPublicacao deve estar no formato d/m/Y
+     * @return $this
      */
     public function setDataPublicacao($dataPublicacao)
     {
         $this->dataPublicacao = Carbon::createFromFormat('d/m/Y', $dataPublicacao);
+
+        return $this;
     }
 
     /**
      * Seta os dados da bula do paciente.
      *
      * @param \Hevertonfreitas\Bulario\DadosBula $bulaPaciente
+     * @return $this
      */
     public function setBulaPaciente(DadosBula $bulaPaciente)
     {
         $this->bulaPaciente = $bulaPaciente;
+
+        return $this;
     }
 
     /**
      * Seta os dados da bula do profissional.
      *
      * @param \Hevertonfreitas\Bulario\DadosBula $bulaProfissional
+     * @return $this
      */
     public function setBulaProfissional(DadosBula $bulaProfissional)
     {
         $this->bulaProfissional = $bulaProfissional;
+
+        return $this;
     }
 
     /**

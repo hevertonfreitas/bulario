@@ -63,4 +63,18 @@ class BularioTest extends TestCase
             $this->assertTrue($ex instanceof \GuzzleHttp\Exception\ConnectException);
         }
     }
+
+    public function testListarMedicamentos()
+    {
+        $medicamentos = Bulario::listarMedicamentos();
+
+        $this->assertInternalType('array', $medicamentos);
+    }
+
+    public function testListarEmpresas()
+    {
+        $empresas = Bulario::listarEmpresas();
+
+        $this->assertInternalType('array', $empresas);
+    }
 }
