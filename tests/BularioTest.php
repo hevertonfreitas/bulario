@@ -20,7 +20,15 @@ use PHPUnit\Framework\TestCase;
 
 class BularioTest extends TestCase
 {
+    /**
+     * @expectedException \InvalidArgumentException
+     */
     public function testBuscaVazia()
+    {
+        Bulario::buscarMedicamentos();
+    }
+
+    public function testBuscaInvalida()
     {
         try {
             $medicamentos = Bulario::buscarMedicamentos('astofo');
