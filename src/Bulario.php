@@ -19,6 +19,7 @@ namespace Hevertonfreitas\Bulario;
 use Collections\ArrayList;
 use Doctrine\Common\Cache\FilesystemCache;
 use Goutte\Client;
+use League\Uri\Schemes\Http;
 
 /**
  * Classe para auxiliar na busca de informações sobre bulas no Brasil,
@@ -69,8 +70,13 @@ class Bulario
             throw new \InvalidArgumentException('Informe pelo menos um parâmetro para o método!');
         }
         $Client = new Client();
+        $uri = Http::createFromComponents([
+            'scheme' => 'http',
+            'host' => 'www.anvisa.gov.br',
+            'path' => '/datavisa/fila_bula/frmResultado.asp',
+        ]);
 
-        $crawler = $Client->request('POST', 'http://www.anvisa.gov.br/datavisa/fila_bula/frmResultado.asp', [
+        $crawler = $Client->request('POST', $uri, [
             'hddLetra' => '',
             'txtMedicamento' => $medicamento,
             'txtEmpresa' => $empresa,
@@ -86,14 +92,18 @@ class Bulario
         try {
             $trs = $crawler->filter('#tblResultado > tbody > tr');
             if ($trs->first()->filter('td')->count() > 1) {
-                $trs->each(function ($node) use (&$Medicamentos) {
+                $trs->each(function (\Symfony\Component\DomCrawler\Crawler $node) use (&$Medicamentos) {
                     if (trim($node->filter('td')->eq(0)->text()) != 'Nenhuma bula na fila de análise') {
                         $nomeMedicamento = trim($node->filter('td')->eq(0)->text());
                         $nomeEmpresa = trim($node->filter('td')->eq(1)->text());
                         $exp = trim($node->filter('td')->eq(2)->text());
                         $dataPub = trim($node->filter('td')->eq(3)->text());
-                        $dadosBulaPaciente = self::stripJsFunction($node->filter('td')->eq(4)->filter('a')->attr('onclick'));
-                        $dadosBulaProfissional = self::stripJsFunction($node->filter('td')->eq(5)->filter('a')->attr('onclick'));
+                        $dadosBulaPaciente = self::stripJsFunction(
+                            $node->filter('td')->eq(4)->filter('a')->attr('onclick')
+                        );
+                        $dadosBulaProfissional = self::stripJsFunction(
+                            $node->filter('td')->eq(5)->filter('a')->attr('onclick')
+                        );
 
                         $Bula = new Bula();
 
@@ -101,8 +111,16 @@ class Bulario
                         $Bula->setEmpresa($nomeEmpresa);
                         $Bula->setExpediente($exp);
                         $Bula->setDataPublicacao($dataPub);
-                        $Bula->setBulaPaciente(new DadosBula($dadosBulaPaciente['transacao'], $dadosBulaPaciente['anexo']));
-                        $Bula->setBulaProfissional(new DadosBula($dadosBulaProfissional['transacao'], $dadosBulaProfissional['anexo']));
+                        $bulaPaciente = new DadosBula(
+                            $dadosBulaPaciente['transacao'],
+                            $dadosBulaPaciente['anexo']
+                        );
+                        $Bula->setBulaPaciente($bulaPaciente);
+                        $bulaProfissional = new DadosBula(
+                            $dadosBulaProfissional['transacao'],
+                            $dadosBulaProfissional['anexo']
+                        );
+                        $Bula->setBulaProfissional($bulaProfissional);
 
                         $Medicamentos->add($Bula);
                     }
@@ -128,7 +146,16 @@ class Bulario
         $result = $cacheDriver->fetch('lista_medicamentos');
 
         if (empty($result)) {
-            $listaMedicamentos = file_get_contents('http://www.anvisa.gov.br/datavisa/fila_bula/funcoes/ajax.asp?opcao=getsuggestion&ptipo=1');
+            $uri = Http::createFromComponents([
+                'scheme' => 'http',
+                'host' => 'www.anvisa.gov.br',
+                'path' => '/datavisa/fila_bula/funcoes/ajax.asp',
+                'query' => http_build_query([
+                    'opcao' => 'getsuggestion',
+                    'ptipo' => '1',
+                ]),
+            ]);
+            $listaMedicamentos = file_get_contents($uri);
 
             $result = json_decode(utf8_encode($listaMedicamentos));
 
@@ -151,7 +178,16 @@ class Bulario
         $result = $cacheDriver->fetch('lista_empresas');
 
         if (empty($result)) {
-            $listaEmpresas = file_get_contents('http://www.anvisa.gov.br/datavisa/fila_bula/funcoes/ajax.asp?opcao=getsuggestion&ptipo=2');
+            $uri = Http::createFromComponents([
+                'scheme' => 'http',
+                'host' => 'www.anvisa.gov.br',
+                'path' => '/datavisa/fila_bula/funcoes/ajax.asp',
+                'query' => http_build_query([
+                    'opcao' => 'getsuggestion',
+                    'ptipo' => '2',
+                ]),
+            ]);
+            $listaEmpresas = file_get_contents($uri);
 
             $result = json_decode(utf8_encode($listaEmpresas));
 
