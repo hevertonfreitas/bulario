@@ -16,7 +16,7 @@
 
 namespace Hevertonfreitas\Bulario;
 
-use League\Uri\Schemes\Http;
+use League\Uri\Uri;
 
 /**
  * Classe que define o id da transação e do anexo de uma bula.
@@ -42,7 +42,7 @@ class DadosBula
     /**
      * URL para acessar o PDF da bula.
      *
-     * @var \League\Uri\Schemes\Http
+     * @var \League\Uri\Uri
      */
     private $url;
 
@@ -69,7 +69,7 @@ class DadosBula
     /**
      * Retorna a URL para o PDF da bula.
      *
-     * @return \League\Uri\Schemes\Http
+     * @return \League\Uri\Uri
      */
     public function getUrl()
     {
@@ -87,7 +87,7 @@ class DadosBula
         $this->transacao = $transacao;
         $this->anexo = $anexo;
 
-        $uri = Http::createFromComponents([
+        $uri = Uri::createFromComponents([
             'scheme' => 'http',
             'host' => 'www.anvisa.gov.br',
             'path' => '/datavisa/fila_bula/frmVisualizarBula.asp',

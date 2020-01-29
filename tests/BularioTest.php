@@ -17,6 +17,7 @@
 namespace Hevertonfreitas\Bulario;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpClient\Exception\TransportException;
 
 class BularioTest extends TestCase
 {
@@ -35,7 +36,7 @@ class BularioTest extends TestCase
 
             $this->assertEmpty($medicamentos);
         } catch (\Exception $ex) {
-            $this->assertTrue($ex instanceof \GuzzleHttp\Exception\ConnectException);
+            $this->assertTrue($ex instanceof TransportException);
         }
     }
 
@@ -49,7 +50,7 @@ class BularioTest extends TestCase
                 $this->assertContains('pdf', $headers['Content-Type']);
             }
         } catch (\Exception $ex) {
-            $this->assertTrue($ex instanceof \GuzzleHttp\Exception\ConnectException);
+            $this->assertTrue($ex instanceof TransportException);
         }
     }
 
@@ -68,7 +69,7 @@ class BularioTest extends TestCase
                 $this->assertNotEmpty($medicamentos);
             }
         } catch (\Exception $ex) {
-            $this->assertTrue($ex instanceof \GuzzleHttp\Exception\ConnectException);
+            $this->assertTrue($ex instanceof TransportException);
         }
     }
 

@@ -11,11 +11,12 @@
     ],
     "require": {
         "php": ">=5.6.0",
-        "fabpot/goutte": "^3.1",
-        "danielstjules/stringy": "~2.2",
+        "ext-json": "*",
+        "danielstjules/stringy": "~3.1",
         "doctrine/cache": "^1.6",
-        "easyframework/collections": "^4.1",
-        "league/uri": "^4.0",
+        "doctrine/collections": "^1.6",
+        "fabpot/goutte": "^4.0",
+        "league/uri": "^6.1",
         "nesbot/carbon": "^2.29"
     },
     "require-dev": {

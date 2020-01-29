@@ -16,10 +16,10 @@
 
 namespace Hevertonfreitas\Bulario;
 
-use Collections\ArrayList;
 use Doctrine\Common\Cache\FilesystemCache;
+use Doctrine\Common\Collections\ArrayCollection;
 use Goutte\Client;
-use League\Uri\Schemes\Http;
+use League\Uri\Uri;
 
 /**
  * Classe para auxiliar na busca de informações sobre bulas no Brasil,
@@ -62,7 +62,7 @@ class Bulario
      *
      * @throws \Exception Caso não for possível trazer os resultados
      *
-     * @return \Collections\ArrayList Todas as bulas encontradas
+     * @return \Doctrine\Common\Collections\ArrayCollection Todas as bulas encontradas
      */
     public static function buscarMedicamentos($medicamento = '', $empresa = '', $expediente = '')
     {
@@ -70,7 +70,7 @@ class Bulario
             throw new \InvalidArgumentException('Informe pelo menos um parâmetro para o método!');
         }
         $Client = new Client();
-        $uri = Http::createFromComponents([
+        $uri = Uri::createFromComponents([
             'scheme' => 'http',
             'host' => 'www.anvisa.gov.br',
             'path' => '/datavisa/fila_bula/frmResultado.asp',
@@ -87,7 +87,7 @@ class Bulario
             'btnPesquisar' => '',
         ]);
 
-        $Medicamentos = new ArrayList();
+        $Medicamentos = new ArrayCollection();
 
         try {
             $trs = $crawler->filter('#tblResultado > tbody > tr');
@@ -146,7 +146,7 @@ class Bulario
         $result = $cacheDriver->fetch('lista_medicamentos');
 
         if (empty($result)) {
-            $uri = Http::createFromComponents([
+            $uri = Uri::createFromComponents([
                 'scheme' => 'http',
                 'host' => 'www.anvisa.gov.br',
                 'path' => '/datavisa/fila_bula/funcoes/ajax.asp',
@@ -178,7 +178,7 @@ class Bulario
         $result = $cacheDriver->fetch('lista_empresas');
 
         if (empty($result)) {
-            $uri = Http::createFromComponents([
+            $uri = Uri::createFromComponents([
                 'scheme' => 'http',
                 'host' => 'www.anvisa.gov.br',
                 'path' => '/datavisa/fila_bula/funcoes/ajax.asp',
